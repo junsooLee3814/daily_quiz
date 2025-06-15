@@ -1,1 +1,30 @@
+name: YouTube Upload
 
+on:
+  schedule:
+    - cron: '30 22 * * *' # 매일 07:30 KST (UTC+9 → UTC 22:30)
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore client_secrets.json
+        run: echo "${{ secrets.YOUTUBE_CLIENT_SECRETS }}" > youtube_uploader/client_secrets.json
+
+      - name: Restore youtube_credentials_1.pickle
+        run: echo "${{ secrets.YOUTUBE_TOKEN_JSON }}" | base64 -d > youtube_uploader/youtube_credentials_1.pickle
+
+      - name: Upload to YouTube
+        run: python youtube_uploader/upload_to_youtube.py
