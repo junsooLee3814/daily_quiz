@@ -4,6 +4,9 @@
 google_service_account.json
 *.key
 *.pem
+youtube_uploader/client_secrets.json
+youtube_uploader/token.pickle
+youtube_uploader/token.json
 
 # 🐍 Python 관련
 __pycache__/
