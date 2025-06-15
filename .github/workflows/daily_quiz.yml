@@ -1,4 +1,4 @@
-name: 매일 퀴즈 동영상 자동 생성
+name: Daily_Quiz
 
 on:
   schedule:
