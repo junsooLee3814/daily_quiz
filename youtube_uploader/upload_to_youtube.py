@@ -42,9 +42,9 @@ def upload_video(file_path, title, description, tags):
     print('업로드 성공! 영상 ID:', response['id'])
 
 if __name__ == '__main__':
-    upload_video(
-        '../video_merge/combined_video.mp4',
-        '자동 업로드 테스트',
-        '이 영상은 자동 업로드 테스트입니다.',
-        ['테스트', '자동업로드']
+   upload_video(
+    'video_merge/combined_video.mp4',
+    '자동 업로드 테스트',
+    '이 영상은 자동 업로드 테스트입니다.',
+    ['테스트', '자동업로드']
     )
