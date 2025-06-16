@@ -28,3 +28,6 @@ jobs:
   
       - name: Upload to YouTube
         run: python youtube_uploader/upload_to_youtube.py
+
+      - name: Check token.json content
+        run: cat youtube_uploader/token.json
