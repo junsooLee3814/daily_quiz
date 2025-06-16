@@ -23,8 +23,8 @@ jobs:
       - name: Restore client_secrets.json
         run: echo "${{ secrets.YOUTUBE_CLIENT_SECRETS }}" > youtube_uploader/client_secrets.json
 
-      - name: Restore youtube_credentials_1.pickle
-        run: echo "${{ secrets.YOUTUBE_TOKEN_JSON }}" | base64 -d > youtube_uploader/youtube_credentials_1.pickle
-
+      - name: Restore token.json
+        run: echo "${{ secrets.YOUTUBE_TOKEN_JSON }}" > youtube_uploader/token.json
+  
       - name: Upload to YouTube
         run: python youtube_uploader/upload_to_youtube.py
