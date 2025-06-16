@@ -1,5 +1,6 @@
 import os
 import pickle
+from datetime import datetime
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
@@ -8,17 +9,7 @@ SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
 def get_authenticated_service():
     creds = Credentials.from_authorized_user_file('youtube_uploader/token.json', SCOPES)
     return build('youtube', 'v3', credentials=creds)
-    #pickle_file = 'youtube_credentials_1.pickle'
-    if os.path.exists(pickle_file):
-        with open(pickle_file, 'rb') as token:
-            creds = pickle.load(token)
-    else:
-        raise Exception("인증 토큰 파일이 없습니다. 로컬에서 먼저 인증을 진행하세요.")
-    if creds and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-        with open(pickle_file, 'wb') as token:
-            pickle.dump(creds, token)
-    return build('youtube', 'v3', credentials=creds)
+
 
 def upload_video(file_path, title, description, tags):
     youtube = get_authenticated_service()
@@ -42,9 +33,18 @@ def upload_video(file_path, title, description, tags):
     print('업로드 성공! 영상 ID:', response['id'])
 
 if __name__ == '__main__':
-   upload_video(
-    'video_merge/combined_video.mp4',
-    '자동 업로드 테스트',
-    '이 영상은 자동 업로드 테스트입니다.',
-    ['테스트', '자동업로드']
+    # 오늘 날짜 구하기
+    today = datetime.now().strftime('%Y%m%d')
+
+    # 제목, 설명, 태그 자동 생성
+    title = f"퀴즈#{today} 오늘퀴즈!!이 포스팅은 쿠팡파트너스 활동의 일환으로 일정보수를 지급받습니다"
+    description = "퀴즈로 뇌를 깨워보세요. 맞출 수 있을까요?이 포스팅은 쿠팡파트너스 활동으로 일정보수를 지급받습니다"
+    tags = ["퀴즈", "교육", "상식", "게임", "문제풀이", "IQ", "재미", "학습"]
+
+    upload_video(
+        'video_merge/combined_video.mp4',
+        title,
+        description,
+        tags
     )
+
