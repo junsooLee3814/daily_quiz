@@ -1,13 +1,14 @@
 import os
 import pickle
+from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
-from google.auth.transport.requests import Request
 
 SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
 
 def get_authenticated_service():
-    creds = None
-    pickle_file = 'youtube_credentials_1.pickle'
+    creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    return build('youtube', 'v3', credentials=creds)
+    #pickle_file = 'youtube_credentials_1.pickle'
     if os.path.exists(pickle_file):
         with open(pickle_file, 'rb') as token:
             creds = pickle.load(token)
