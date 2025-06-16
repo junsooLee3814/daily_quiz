@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
 
 def get_authenticated_service():
-    creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    creds = Credentials.from_authorized_user_file('youtube_uploader/token.json', SCOPES)
     return build('youtube', 'v3', credentials=creds)
     #pickle_file = 'youtube_credentials_1.pickle'
     if os.path.exists(pickle_file):
