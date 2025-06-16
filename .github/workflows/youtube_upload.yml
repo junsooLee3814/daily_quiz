@@ -18,8 +18,8 @@ jobs:
           python-version: '3.13'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
-
+        run: pip install -r youtube_uploader/requirements_youtube.txt
+     
       - name: Restore client_secrets.json
         run: echo "${{ secrets.YOUTUBE_CLIENT_SECRETS }}" > youtube_uploader/client_secrets.json
 
