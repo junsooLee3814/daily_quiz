@@ -2,11 +2,9 @@ name: Daily_Quiz
 
 on:
   schedule:
-    # 매일 오전 6시 50분 (UTC 기준으로는 21:50, 한국시간 06:50)
-    # cron 형식: '분 시 일 월 요일'
-    - cron: '50 21 * * *'
-  workflow_dispatch: # 수동 실행도 가능하게 함
-
+    # 매일 오전 11시 30분 (UTC 기준으로는 02:30, 한국시간 11:30)
+    - cron: '30 2 * * *'
+  workflow_dispatch:
 jobs:
   generate_daily_quiz_video:
     runs-on: ubuntu-latest
