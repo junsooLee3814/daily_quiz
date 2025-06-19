@@ -2,8 +2,8 @@ name: Daily_Quiz
 
 on:
   schedule:
-    # 매일 정오 12시 (UTC 기준 03:00, 한국시간 12:00)
-    - cron: '0 3 * * *'
+    # 매일 오전 11시 30분 (UTC 기준 02:30, 한국시간 11:30)
+    - cron: '30 2 * * *'
   workflow_dispatch:
 
 jobs:
